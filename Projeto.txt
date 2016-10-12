@@ -1,0 +1,13 @@
+Ideia para o projeto final:
+
+-Resolver o problema do caixeiro viajante para um veículo que segue um caminho utilizando um sistema de carrot chaser
+
+-parametros a serem otimizados: sequencia de waypoints, velocidade e distancia do carrot
+
+-simulador a ser usado: v-rep
+
+-linguagem: c/c++
+
+-parametros fixos a serem definidos: tamanho do cenário, numero de pontos distancia média entre pontos e distribuição de pontos, faixa de velocidade operável, obstáculos, terreno (dificuldade do percurso)
+
+-proximos objetivos: definir cenários e modelar o ambiente, representação de um individuo, operadores de reprodução
