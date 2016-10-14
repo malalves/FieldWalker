@@ -4,10 +4,33 @@ Ideia para o projeto final:
 
 -parametros a serem otimizados: sequencia de waypoints, velocidade e distancia do carrot
 
--simulador a ser usado: v-rep
+-simulador a ser usado: ?
 
 -linguagem: c/c++
 
 -parametros fixos a serem definidos: tamanho do cenário, numero de pontos distancia média entre pontos e distribuição de pontos, faixa de velocidade operável, obstáculos, terreno (dificuldade do percurso)
 
 -proximos objetivos: definir cenários e modelar o ambiente, representação de um individuo, operadores de reprodução
+
+Decisões:
+
+-todos os pontos conectam com todos os pontos
+-parametro de fitness é o inverso do tempo decorrido para percorrer o trajeto
+-estrutura do individuo:
+	-vetor de waypoints: ordem dos waypoints que vai percorrer
+	-vetor de velocidades: velocidades em cada trecho
+	-vetor de carrot: parametro do carrot em cada trecho	-agrupar esses tres em uma matriz 3xN
+	-parmetros fixos: velocidade máxima, parametro de timeout
+	-fitness
+-estruturas de reprodução:
+	
+-geração de população inicial
+-constantes do algoritimo:
+	-ponto inicial
+	-constantes de croosover e mutação
+	-posições dos waypoints
+	-numero de waypoints: a princípio 9 contado com o retorno ao ponto inicial
+	-tamanho da população
+	-numero de reprodutores
+-estrutura de torneio para escolher os individous que vão gerar descendentes
+
