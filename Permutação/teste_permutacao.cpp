@@ -1,4 +1,5 @@
 #include <iostream>
+#include <stdio.h>
 #include <cmath>
 #include <vector>
 #include <time.h>
@@ -8,7 +9,7 @@
 using namespace std;
 
 #define numberOfCities 20
-#define numberOfIndividuals 200
+#define numberOfIndividuals 100
 #define maxIt 300
 #define mutationRate 0.015
 #define tournamentSize 5
@@ -20,32 +21,32 @@ class Cities{
 public:
 	int x[numberOfCities];
 	int y[numberOfCities];
-	
+
 	// Constructs a randomly placed city
 	Cities(){
 		for (int i = 0; i < numberOfCities; i++)
 		{
 			x[i] = (rand() %200);
-			y[i] = (rand() %200);	
+			y[i] = (rand() %200);
 		}
 	}
-	
+
 	// Constructs cities at chosen x, y location
 	Cities(int x[numberOfCities], int y[numberOfCities]){
 		x = x;
 		y = y;
 	}
-	
+
 	// Gets city's x coordinate
 	int getX(int i){
 		return x[i];
 	}
-	
+
 	// Gets city's y coordinate
 	int getY(int i){
 		return y[i];
 	}
-	
+
 	// Gets the distance matrix
 	double** Dmat(){
 		double** distance;
@@ -63,7 +64,7 @@ public:
 				distance[j][i] = distance[i][j];
 			}
 		}
-		
+
 		return distance;
 	}
 };
@@ -86,7 +87,7 @@ public:
 		fitness = 0;
 		distance = 0;
 	}
-	
+
 	Tour(vector<int> newTour){
 		tour = newTour;
 		fitness = 0;
@@ -112,7 +113,7 @@ public:
 		tour[i] = tour[j];
 		tour[j] = aux;
 	}
-	
+
 	// Gets the total distance of the tour
 	int getDistance(){
 		if (distance == 0) {
@@ -149,7 +150,7 @@ public:
 		}
 		popSize = populationSize;
 	}
-	
+
 	// Gets a tour from population
 	Tour getTour(int index) {
 		return tours[index];
@@ -294,13 +295,21 @@ public:
 
 int main(){
 	srand(time(NULL));
+	FILE *dados,*dados1;
+
+	dados = fopen("Dados.txt","w");
+    dados1 = fopen("Dados1.txt","w");
 
 	AG ag;
 	Population pop(numberOfIndividuals,true);
 	Cities ct;
 	Dmatrix = ct.Dmat();
-	
-	Tour t;
+
+	Tour t, tinit;
+	tinit = pop.getFittest();
+	for(int j = 0; j < numberOfCities; j++){
+        fprintf(dados1,"%d  %d\n",ct.x[tinit.getCity(j)],ct.y[tinit.getCity(j)]);
+    }
 	for(int loop=0; loop< maxIt; loop++){
 		t = pop.getFittest();
 		for (int j = 0; j < numberOfCities; j++){
@@ -310,9 +319,17 @@ int main(){
 		pop = ag.evolvePopulation(pop);
 	}
 	t = pop.getFittest();
-		for (int j = 0; j < numberOfCities; j++){
-				cout << t.getCity(j) << " ";
-		}
-		cout<< t.getDistance() << " " << t.getFitness() << endl;
+    for (int j = 0; j < numberOfCities; j++){
+        cout << t.getCity(j) << " ";
+				//fprintf(dados,"%d ",t.getCity(j));
+    }
+    cout<< t.getDistance() << " " << t.getFitness() << endl;
+    for(int j = 0; j < numberOfCities; j++){
+        fprintf(dados,"%d  %d\n",ct.x[t.getCity(j)],ct.y[t.getCity(j)]);
+    }
+
+    fclose(dados);
+    fclose(dados1);
+
 	return 0;
 }
