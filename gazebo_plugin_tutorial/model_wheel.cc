@@ -68,12 +68,14 @@ namespace gazebo
 		void Update(const common::UpdateInfo & /*_i axis = nfo*/)
 		{
 			/*math::Vector3 *axis = new math::Vector3(0,0,1);
-			this->RJoint->SetAxis(0, *axis);
-			this->LJoint->SetAxis(0, *axis);
-	*/
+			this->RJoint->SetAxis(1, *axis);
+			this->LJoint->SetAxis(1, *axis);*/
+		
 			// Apply a small force to the wheels.
-			this->RJoint->SetVelocity(1, 1);
-			this->LJoint->SetVelocity(1, 1);
+			this->RJoint->SetParam("max_force", 1, 10000);
+			this->LJoint->SetParam("max_force", 1, 10000);
+			this->RJoint->SetParam("vel", 1, 10);
+			this->LJoint->SetParam("vel", 1, 10);
 		}
 	};
 

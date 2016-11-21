@@ -162,7 +162,7 @@
                 <soft_erp>0.2</soft_erp>
                 <kp>1e+13</kp>
                 <kd>1</kd>
-                <max_vel>0.01</max_vel>
+                <max_vel>10</max_vel>
                 <min_depth>0</min_depth>
               </ode>
               <bullet>
@@ -261,7 +261,7 @@
                 <soft_erp>0.2</soft_erp>
                 <kp>1e+13</kp>
                 <kd>1</kd>
-                <max_vel>0.01</max_vel>
+                <max_vel>10</max_vel>
                 <min_depth>0</min_depth>
               </ode>
               <bullet>
@@ -360,7 +360,7 @@
                 <soft_erp>0.2</soft_erp>
                 <kp>1e+13</kp>
                 <kd>1</kd>
-                <max_vel>0.01</max_vel>
+                <max_vel>10</max_vel>
                 <min_depth>0</min_depth>
               </ode>
               <bullet>
@@ -457,7 +457,7 @@
                 <soft_erp>0.2</soft_erp>
                 <kp>1e+13</kp>
                 <kd>1</kd>
-                <max_vel>0.01</max_vel>
+                <max_vel>10</max_vel>
                 <min_depth>0</min_depth>
               </ode>
               <bullet>
@@ -558,7 +558,7 @@
       </joint>
       <static>0</static>
       <allow_auto_disable>0</allow_auto_disable>
-      <plugin name='model_wheel' filename='libmodel_push.so'/>
+      <plugin name='model_wheel' filename='libmodel_wheel.so'/>
       <pose frame=''>0.121766 0.013633 0 0 -0 0</pose>
     </model>
     <state world_name='default'>
