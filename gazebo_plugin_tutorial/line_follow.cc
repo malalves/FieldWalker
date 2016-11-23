@@ -17,7 +17,7 @@ namespace gazebo
 
 		public: const double AngC = 0.3;
 
-		public: math::Vector2d* points[2] = {new math::Vector2d(-3,3), new math::Vector2d(-3,3)};
+		public: math::Vector2d* points[2] = {new math::Vector2d(-3,3), new math::Vector2d(3,3)};
 
 		public: math::Pose pose;
 
