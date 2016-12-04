@@ -6,25 +6,25 @@
 
 #IncludeRegexTransform: 
 
-/home/malalves/gazebo_plugin_tutorial/line_follow.cc
-boost/bind.hpp
--
-gazebo/gazebo.hh
--
+/home/malalves/gazebo_plugin_tutorial/differential_drive.cc
 gazebo/physics/physics.hh
 -
-gazebo/physics/Joint.hh
+gazebo/transport/transport.hh
 -
-gazebo/common/common.hh
--
-gazebo/math/gzmath.hh
--
-ignition/math/Vector2.hh
--
-math.h
--
-stdio.h
--
+differential_drive.hh
+/home/malalves/gazebo_plugin_tutorial/differential_drive.hh
+
+/home/malalves/gazebo_plugin_tutorial/differential_drive.hh
+gazebo/common/Plugin.hh
+/home/malalves/gazebo_plugin_tutorial/gazebo/common/Plugin.hh
+gazebo/physics/physics.hh
+/home/malalves/gazebo_plugin_tutorial/gazebo/physics/physics.hh
+gazebo/transport/TransportTypes.hh
+/home/malalves/gazebo_plugin_tutorial/gazebo/transport/TransportTypes.hh
+gazebo/gazebo.hh
+/home/malalves/gazebo_plugin_tutorial/gazebo/gazebo.hh
+gazebo/util/system.hh
+/home/malalves/gazebo_plugin_tutorial/gazebo/util/system.hh
 
 /usr/include/gazebo-7/gazebo/Master.hh
 string

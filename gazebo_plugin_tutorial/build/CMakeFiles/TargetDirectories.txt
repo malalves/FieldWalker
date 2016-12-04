@@ -1,3 +1,4 @@
+/home/malalves/gazebo_plugin_tutorial/build/CMakeFiles/teste.dir
 /home/malalves/gazebo_plugin_tutorial/build/CMakeFiles/rebuild_cache.dir
 /home/malalves/gazebo_plugin_tutorial/build/CMakeFiles/model_push.dir
 /home/malalves/gazebo_plugin_tutorial/build/CMakeFiles/edit_cache.dir

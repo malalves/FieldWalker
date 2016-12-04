@@ -6,25 +6,15 @@
 
 #IncludeRegexTransform: 
 
-/home/malalves/gazebo_plugin_tutorial/line_follow.cc
-boost/bind.hpp
--
-gazebo/gazebo.hh
+/home/malalves/gazebo_plugin_tutorial/factory.cc
+ignition/math/Pose3.hh
 -
 gazebo/physics/physics.hh
--
-gazebo/physics/Joint.hh
--
+/home/malalves/gazebo_plugin_tutorial/gazebo/physics/physics.hh
 gazebo/common/common.hh
--
-gazebo/math/gzmath.hh
--
-ignition/math/Vector2.hh
--
-math.h
--
-stdio.h
--
+/home/malalves/gazebo_plugin_tutorial/gazebo/common/common.hh
+gazebo/gazebo.hh
+/home/malalves/gazebo_plugin_tutorial/gazebo/gazebo.hh
 
 /usr/include/gazebo-7/gazebo/Master.hh
 string

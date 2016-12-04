@@ -111,6 +111,19 @@ depend:
 .PHONY : depend
 
 #=============================================================================
+# Target rules for targets named teste
+
+# Build rule for target.
+teste: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 teste
+.PHONY : teste
+
+# fast build rule for target.
+teste/fast:
+	$(MAKE) -f CMakeFiles/teste.dir/build.make CMakeFiles/teste.dir/build
+.PHONY : teste/fast
+
+#=============================================================================
 # Target rules for targets named model_push
 
 # Build rule for target.
@@ -270,12 +283,40 @@ model_wheel.cc.s:
 	$(MAKE) -f CMakeFiles/model_wheel.dir/build.make CMakeFiles/model_wheel.dir/model_wheel.cc.s
 .PHONY : model_wheel.cc.s
 
+teste.o: teste.cc.o
+
+.PHONY : teste.o
+
+# target to build an object file
+teste.cc.o:
+	$(MAKE) -f CMakeFiles/teste.dir/build.make CMakeFiles/teste.dir/teste.cc.o
+.PHONY : teste.cc.o
+
+teste.i: teste.cc.i
+
+.PHONY : teste.i
+
+# target to preprocess a source file
+teste.cc.i:
+	$(MAKE) -f CMakeFiles/teste.dir/build.make CMakeFiles/teste.dir/teste.cc.i
+.PHONY : teste.cc.i
+
+teste.s: teste.cc.s
+
+.PHONY : teste.s
+
+# target to generate assembly for a file
+teste.cc.s:
+	$(MAKE) -f CMakeFiles/teste.dir/build.make CMakeFiles/teste.dir/teste.cc.s
+.PHONY : teste.cc.s
+
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
 	@echo "... all (the default if no target is provided)"
 	@echo "... clean"
 	@echo "... depend"
+	@echo "... teste"
 	@echo "... rebuild_cache"
 	@echo "... model_push"
 	@echo "... edit_cache"
@@ -294,6 +335,9 @@ help:
 	@echo "... model_wheel.o"
 	@echo "... model_wheel.i"
 	@echo "... model_wheel.s"
+	@echo "... teste.o"
+	@echo "... teste.i"
+	@echo "... teste.s"
 .PHONY : help
 
 

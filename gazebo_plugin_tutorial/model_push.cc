@@ -6,8 +6,7 @@
 
 namespace gazebo
 {
-  class ModelPush : public ModelPlugin
-  {
+  class ModelPush : public ModelPlugin {
     public: void Load(physics::ModelPtr _parent, sdf::ElementPtr /*_sdf*/)
     {
       // Store the pointer to the model

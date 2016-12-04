@@ -6,24 +6,12 @@
 
 #IncludeRegexTransform: 
 
-/home/malalves/gazebo_plugin_tutorial/line_follow.cc
-boost/bind.hpp
--
+/home/malalves/gazebo_plugin_tutorial/teste.cc
 gazebo/gazebo.hh
--
-gazebo/physics/physics.hh
--
-gazebo/physics/Joint.hh
 -
 gazebo/common/common.hh
 -
-gazebo/math/gzmath.hh
--
-ignition/math/Vector2.hh
--
-math.h
--
-stdio.h
+gazebo/physics/physics.hh
 -
 
 /usr/include/gazebo-7/gazebo/Master.hh

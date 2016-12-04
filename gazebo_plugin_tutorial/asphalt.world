@@ -1,7 +1,7 @@
 <sdf version='1.6'>
   <world name='default'>
     <light name='sun' type='directional'>
-      <cast_shadows>1</cast_shadows>
+      <cast_shadows>0</cast_shadows>
       <pose frame=''>0 0 10 0 -0 0</pose>
       <diffuse>0.8 0.8 0.8 1</diffuse>
       <specular>0.1 0.1 0.1 1</specular>
@@ -61,7 +61,7 @@
       </link>
     </model>
     <gravity>0 0 -100</gravity>
-    <magnetic_field>6e-06 2.3e-05 -4.2e-05</magnetic_field>
+    <magnetic_field>0 0 0</magnetic_field>
     <atmosphere type='adiabatic'/>
     <physics name='default_physics' default='0' type='ode'>
       <max_step_size>0.01</max_step_size>
@@ -71,7 +71,7 @@
     <scene>
       <ambient>0.4 0.4 0.4 1</ambient>
       <background>0.7 0.7 0.7 1</background>
-      <shadows>1</shadows>
+      <shadows>0</shadows>
     </scene>
     <spherical_coordinates>
       <surface_model>EARTH_WGS84</surface_model>
@@ -118,7 +118,7 @@
               <normal_map>__default__</normal_map>
             </shader>
           </material>
-          <cast_shadows>1</cast_shadows>
+          <cast_shadows>0</cast_shadows>
           <transparency>0</transparency>
         </visual>
         <collision name='collision'>
@@ -216,7 +216,7 @@
               <normal_map>__default__</normal_map>
             </shader>
           </material>
-          <cast_shadows>1</cast_shadows>
+          <cast_shadows>0</cast_shadows>
           <transparency>0</transparency>
         </visual>
         <collision name='collision'>
@@ -315,7 +315,7 @@
               <normal_map>__default__</normal_map>
             </shader>
           </material>
-          <cast_shadows>1</cast_shadows>
+          <cast_shadows>0</cast_shadows>
           <transparency>0</transparency>
         </visual>
         <collision name='collision'>
@@ -413,7 +413,7 @@
               <normal_map>__default__</normal_map>
             </shader>
           </material>
-          <cast_shadows>1</cast_shadows>
+          <cast_shadows>0</cast_shadows>
           <transparency>0</transparency>
         </visual>
         <collision name='collision'>
@@ -562,33 +562,60 @@
       <pose frame=''>0.121766 0.013633 0 0 -0 0</pose>
     </model>
     <state world_name='default'>
-      <sim_time>0 0</sim_time>
-      <real_time>0 0</real_time>
-      <wall_time>1480091114 200686483</wall_time>
-      <iterations>0</iterations>
+      <iterations>100000</iterations>
       <model name='MyCarBot'>
         <pose frame=''>0.121763 0.013636 0.420881 1.5e-05 -4.4e-05 1.55929</pose>
         <scale>1 1 1</scale>
         <link name='link_0'>
           <pose frame=''>0.124495 -0.287059 0.499972 1.5e-05 -4.4e-05 1.55929</pose>
-          <velocity>0 0 0 0 -0 0</velocity>
-          <acceleration>0 0 0 0 -0 2e-06</acceleration>
+          <velocity>0 -0 0 0 0 0</velocity>
+          <acceleration>0 0 0 0 -0 0</acceleration>
           <wrench>0 0 0 0 -0 0</wrench>
         </link>
         <link name='link_1'>
           <pose frame=''>0.757271 0.382927 0.300032 1.57075 -0.000263 1.55932</pose>
-          <velocity>0 0 0 0 -0 0</velocity>
+          <velocity>0 -0 0 0 0 0</velocity>
           <acceleration>0 0 0 0 -0 0</acceleration>
           <wrench>0 0 0 0 -0 0</wrench>
         </link>
         <link name='link_1_clone'>
           <pose frame=''>-0.492708 0.39732 0.299994 1.57073 0.000117 1.55932</pose>
-          <velocity>0 0 0 0 -0 0</velocity>
+          <velocity>0 -0 0 0 0 0</velocity>
           <acceleration>0 0 0 0 -0 0</acceleration>
           <wrench>0 0 0 0 -0 0</wrench>
         </link>
         <link name='link_2'>
           <pose frame=''>0.11556 -1.0642 0.199936 -0.000483 -2.1e-05 1.55937</pose>
+          <velocity>0 -0 0 0 0 0</velocity>
+          <acceleration>0 0 0 0 -0 0</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='asphalt_plane'>
+        <pose frame=''>-0.158969 0.122732 0 0 -0 0</pose>
+        <scale>1 1 1</scale>
+        <link name='link'>
+          <pose frame=''>-0.158969 0.122732 0 0 -0 0</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 0 0 -0 0</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='asphalt_plane_0'>
+        <pose frame=''>-0.094866 20.0175 0 0 -0 0</pose>
+        <scale>1 1 1</scale>
+        <link name='link'>
+          <pose frame=''>-0.094866 20.0175 0 0 -0 0</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 0 0 -0 0</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='asphalt_plane_1'>
+        <pose frame=''>-0.111225 39.7281 0 0 -0 0</pose>
+        <scale>1 1 1</scale>
+        <link name='link'>
+          <pose frame=''>-0.111225 39.7281 0 0 -0 0</pose>
           <velocity>0 0 0 0 -0 0</velocity>
           <acceleration>0 0 0 0 -0 0</acceleration>
           <wrench>0 0 0 0 -0 0</wrench>
@@ -610,10 +637,142 @@
     </state>
     <gui fullscreen='0'>
       <camera name='user_camera'>
-        <pose frame=''>20.2645 -4.41745 37.1864 0.00044 1.0741 2.81221</pose>
+        <pose frame=''>47.8412 -14.4867 75.4904 0.00044 1.0741 2.81221</pose>
         <view_controller>orbit</view_controller>
         <projection_type>perspective</projection_type>
       </camera>
     </gui>
+    <model name='asphalt_plane'>
+      <static>1</static>
+      <link name='link'>
+        <collision name='collision'>
+          <geometry>
+            <box>
+              <size>20 20 0.1</size>
+            </box>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='visual'>
+          <cast_shadows>0</cast_shadows>
+          <geometry>
+            <box>
+              <size>20 20 0.1</size>
+            </box>
+          </geometry>
+          <material>
+            <script>
+              <uri>model://asphalt_plane/materials/scripts</uri>
+              <uri>model://asphalt_plane/materials/textures</uri>
+              <name>vrc/asphalt</name>
+            </script>
+          </material>
+        </visual>
+        <self_collide>0</self_collide>
+        <kinematic>0</kinematic>
+        <gravity>1</gravity>
+      </link>
+      <pose frame=''>-0.158969 0.122732 0 0 -0 0</pose>
+    </model>
+    <model name='asphalt_plane_0'>
+      <static>1</static>
+      <link name='link'>
+        <collision name='collision'>
+          <geometry>
+            <box>
+              <size>20 20 0.1</size>
+            </box>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='visual'>
+          <cast_shadows>0</cast_shadows>
+          <geometry>
+            <box>
+              <size>20 20 0.1</size>
+            </box>
+          </geometry>
+          <material>
+            <script>
+              <uri>model://asphalt_plane/materials/scripts</uri>
+              <uri>model://asphalt_plane/materials/textures</uri>
+              <name>vrc/asphalt</name>
+            </script>
+          </material>
+        </visual>
+        <self_collide>0</self_collide>
+        <kinematic>0</kinematic>
+        <gravity>1</gravity>
+      </link>
+      <pose frame=''>-0.094866 20.0175 0 0 -0 0</pose>
+    </model>
+    <model name='asphalt_plane_1'>
+      <static>1</static>
+      <link name='link'>
+        <collision name='collision'>
+          <geometry>
+            <box>
+              <size>20 20 0.1</size>
+            </box>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='visual'>
+          <cast_shadows>0</cast_shadows>
+          <geometry>
+            <box>
+              <size>20 20 0.1</size>
+            </box>
+          </geometry>
+          <material>
+            <script>
+              <uri>model://asphalt_plane/materials/scripts</uri>
+              <uri>model://asphalt_plane/materials/textures</uri>
+              <name>vrc/asphalt</name>
+            </script>
+          </material>
+        </visual>
+        <self_collide>0</self_collide>
+        <kinematic>0</kinematic>
+        <gravity>1</gravity>
+      </link>
+      <pose frame=''>-0.111225 39.7281 0 0 -0 0</pose>
+    </model>
   </world>
 </sdf>

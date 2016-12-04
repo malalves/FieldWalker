@@ -18,3 +18,6 @@ target_link_libraries(model_wheel ${GAZEBO_LIBRARIES} ${Boost_LIBRARIES})
 
 add_library(line_follow SHARED line_follow.cc)
 target_link_libraries(line_follow ${GAZEBO_LIBRARIES} ${Boost_LIBRARIES})
+
+add_executable(teste teste.cc)
+target_link_libraries(teste ${GAZEBO_LIBRARIES} pthread)
