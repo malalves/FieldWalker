@@ -17,7 +17,7 @@ namespace gazebo
 
 		public: const double AngC = 0.01;
 
-		public: math::Vector2d* points[2] = {new math::Vector2d(-3,3), new math::Vector2d(3,3)};
+		public: math::Vector2d* points[2] = {new math::Vector2d(0,0), new math::Vector2d(3,3)};
 
 		public: math::Pose pose;
 
@@ -96,11 +96,12 @@ namespace gazebo
 			math::Vector2d Cpos, line, speed, relPos;
 
 			//line direction normalized
-			line = (this->points[1]-this->points[0]);
+			line.x = (this->points[1]->x-this->points[0]->x);
+			line.y = (this->points[1]->y-this->points[0]->y);
 			line.Normalize();
-			
+						
 			pose = this->model->GetWorldPose();//pose of the model
-			
+
 			//relative position of the model in relation to the last waypoint
 			Cpos.x = (pose.pos.x - this->points[0]->x);
 			Cpos.y = (pose.pos.y - this->points[0]->y);
@@ -108,12 +109,14 @@ namespace gazebo
 			relPos = Cpos;
 
 			//projects the model relative position in the line direction
-			Cpos = Cpos.Dot(line);
+			Cpos.x = Cpos.Dot(line)*line.x;
+			Cpos.y = Cpos.Dot(line)*line.y;
+			printf("X:%f\nY:%f\n",Cpos.x,Cpos.y);
 
 			//adds the carrotDist in the direction of the line 
-			module = sqrt(Cpos.Dot(Cpos));
-			Cpos.Normalize();
-			Cpos = Cpos*(module+this->carrotDist);
+			Cpos.x = Cpos.x + carrotDist*line.x;
+			Cpos.y = Cpos.y + carrotDist*line.y;
+			//printf("X:%f\nY:%f\n",Cpos.x,Cpos.y);
 
 			//gets the robot orientation
 			yaw = pose.rot.GetYaw();
@@ -140,7 +143,7 @@ namespace gazebo
 			this->Jcontrol->SetVelocityTarget(this->RJoint->GetScopedName(false),speed.x);
 			this->Jcontrol->SetVelocityTarget(this->LJoint->GetScopedName(false),speed.y);
 			//printf("R:%f\nL:%f\n", speed.x, speed.y);
-			printf("R:%f\nL:%f\n", this->RJoint->GetVelocity(0)-speed.x, this->LJoint->GetVelocity(0)-speed.y);
+			//printf("R:%f\nL:%f\n", this->RJoint->GetVelocity(0), this->LJoint->GetVelocity(0));
 		}
 	};
 
