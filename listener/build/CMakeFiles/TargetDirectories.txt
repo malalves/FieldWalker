@@ -1,3 +1,0 @@
-/home/newairs/listener/build/CMakeFiles/rebuild_cache.dir
-/home/newairs/listener/build/CMakeFiles/edit_cache.dir
-/home/newairs/listener/build/CMakeFiles/listener.dir
