@@ -111,6 +111,19 @@ depend:
 .PHONY : depend
 
 #=============================================================================
+# Target rules for targets named line_follow
+
+# Build rule for target.
+line_follow: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 line_follow
+.PHONY : line_follow
+
+# fast build rule for target.
+line_follow/fast:
+	$(MAKE) -f CMakeFiles/line_follow.dir/build.make CMakeFiles/line_follow.dir/build
+.PHONY : line_follow/fast
+
+#=============================================================================
 # Target rules for targets named Gazebo_evolve
 
 # Build rule for target.
@@ -163,6 +176,33 @@ Gazebo_evolve.cc.s:
 	$(MAKE) -f CMakeFiles/Gazebo_evolve.dir/build.make CMakeFiles/Gazebo_evolve.dir/Gazebo_evolve.cc.s
 .PHONY : Gazebo_evolve.cc.s
 
+line_follow.o: line_follow.cc.o
+
+.PHONY : line_follow.o
+
+# target to build an object file
+line_follow.cc.o:
+	$(MAKE) -f CMakeFiles/line_follow.dir/build.make CMakeFiles/line_follow.dir/line_follow.cc.o
+.PHONY : line_follow.cc.o
+
+line_follow.i: line_follow.cc.i
+
+.PHONY : line_follow.i
+
+# target to preprocess a source file
+line_follow.cc.i:
+	$(MAKE) -f CMakeFiles/line_follow.dir/build.make CMakeFiles/line_follow.dir/line_follow.cc.i
+.PHONY : line_follow.cc.i
+
+line_follow.s: line_follow.cc.s
+
+.PHONY : line_follow.s
+
+# target to generate assembly for a file
+line_follow.cc.s:
+	$(MAKE) -f CMakeFiles/line_follow.dir/build.make CMakeFiles/line_follow.dir/line_follow.cc.s
+.PHONY : line_follow.cc.s
+
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -170,12 +210,16 @@ help:
 	@echo "... clean"
 	@echo "... depend"
 	@echo "... edit_cache"
+	@echo "... line_follow"
 	@echo "... rebuild_cache"
 	@echo "... Gazebo_evolve"
 	@echo "... evolve_robots_msgs"
 	@echo "... Gazebo_evolve.o"
 	@echo "... Gazebo_evolve.i"
 	@echo "... Gazebo_evolve.s"
+	@echo "... line_follow.o"
+	@echo "... line_follow.i"
+	@echo "... line_follow.s"
 .PHONY : help
 
 

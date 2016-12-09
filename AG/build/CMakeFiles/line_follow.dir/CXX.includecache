@@ -6,39 +6,25 @@
 
 #IncludeRegexTransform: 
 
-/home/malalves/Documents/sistemas evolutivos/ProjetoFinal/AG/Gazebo_evolve.cc
-iostream
--
-stdio.h
--
-cmath
--
-vector
--
-time.h
--
-cstdlib
--
-algorithm
+/home/malalves/Documents/sistemas evolutivos/ProjetoFinal/AG/line_follow.cc
+boost/bind.hpp
 -
 gazebo/gazebo.hh
 -
-gazebo/common/common.hh
--
 gazebo/physics/physics.hh
 -
-gazebo/msgs/msgs.hh
+gazebo/physics/Joint.hh
 -
-gazebo/transport/transport.hh
+gazebo/common/common.hh
 -
-gazebo/transport/Publisher.hh
+gazebo/math/gzmath.hh
 -
-boost/shared_ptr.hpp
+ignition/math/Vector2.hh
 -
-Evolve.pb.h
-/home/malalves/Documents/sistemas evolutivos/ProjetoFinal/AG/Evolve.pb.h
-EvolveRequest.pb.h
-/home/malalves/Documents/sistemas evolutivos/ProjetoFinal/AG/EvolveRequest.pb.h
+math.h
+-
+stdio.h
+-
 
 /usr/include/gazebo-7/gazebo/Master.hh
 string
@@ -5970,37 +5956,5 @@ string
 vector
 -
 google/protobuf/stubs/common.h
--
-
-msgs/Evolve.pb.h
-string
--
-google/protobuf/stubs/common.h
--
-google/protobuf/generated_message_util.h
--
-google/protobuf/message.h
--
-google/protobuf/repeated_field.h
--
-google/protobuf/extension_set.h
--
-google/protobuf/unknown_field_set.h
--
-
-msgs/EvolveRequest.pb.h
-string
--
-google/protobuf/stubs/common.h
--
-google/protobuf/generated_message_util.h
--
-google/protobuf/message.h
--
-google/protobuf/repeated_field.h
--
-google/protobuf/extension_set.h
--
-google/protobuf/unknown_field_set.h
 -
 

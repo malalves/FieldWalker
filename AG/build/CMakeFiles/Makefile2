@@ -60,6 +60,43 @@ CMAKE_SOURCE_DIR = "/home/malalves/Documents/sistemas evolutivos/ProjetoFinal/AG
 CMAKE_BINARY_DIR = "/home/malalves/Documents/sistemas evolutivos/ProjetoFinal/AG/build"
 
 #=============================================================================
+# Target rules for target CMakeFiles/line_follow.dir
+
+# All Build rule for target.
+CMakeFiles/line_follow.dir/all:
+	$(MAKE) -f CMakeFiles/line_follow.dir/build.make CMakeFiles/line_follow.dir/depend
+	$(MAKE) -f CMakeFiles/line_follow.dir/build.make CMakeFiles/line_follow.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir="/home/malalves/Documents/sistemas evolutivos/ProjetoFinal/AG/build/CMakeFiles" --progress-num=8,9 "Built target line_follow"
+.PHONY : CMakeFiles/line_follow.dir/all
+
+# Include target in all.
+all: CMakeFiles/line_follow.dir/all
+
+.PHONY : all
+
+# Build rule for subdir invocation for target.
+CMakeFiles/line_follow.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start "/home/malalves/Documents/sistemas evolutivos/ProjetoFinal/AG/build/CMakeFiles" 2
+	$(MAKE) -f CMakeFiles/Makefile2 CMakeFiles/line_follow.dir/all
+	$(CMAKE_COMMAND) -E cmake_progress_start "/home/malalves/Documents/sistemas evolutivos/ProjetoFinal/AG/build/CMakeFiles" 0
+.PHONY : CMakeFiles/line_follow.dir/rule
+
+# Convenience name for target.
+line_follow: CMakeFiles/line_follow.dir/rule
+
+.PHONY : line_follow
+
+# clean rule for target.
+CMakeFiles/line_follow.dir/clean:
+	$(MAKE) -f CMakeFiles/line_follow.dir/build.make CMakeFiles/line_follow.dir/clean
+.PHONY : CMakeFiles/line_follow.dir/clean
+
+# clean rule for target.
+clean: CMakeFiles/line_follow.dir/clean
+
+.PHONY : clean
+
+#=============================================================================
 # Target rules for target CMakeFiles/Gazebo_evolve.dir
 
 # All Build rule for target.

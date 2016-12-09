@@ -9,6 +9,11 @@
 #include <gazebo/common/common.hh>
 #include <gazebo/physics/physics.hh>
 #include <gazebo/msgs/msgs.hh>
+#include <gazebo/transport/transport.hh>
+#include <gazebo/transport/Publisher.hh>
+#include <boost/shared_ptr.hpp>
+#include "Evolve.pb.h"
+#include "EvolveRequest.pb.h"
 
 using namespace std;
 
@@ -19,6 +24,9 @@ using namespace std;
 #define tournamentSize 5
 #define NumRobots 10
 #define elitism true
+
+typedef const boost::shared_ptr<const evolve_robots_msgs::msgs::EvolveRequest> evReqPtr;
+typedef const boost::shared_ptr<const evolve_robots_msgs::msgs::Evolve> EvPtr;
 
 int counter;
 
@@ -181,24 +189,23 @@ public:
 		return popSize;
 	}
 
-	typedef const boost::shared_ptr<const evolve_robots_msgs::msgs::Evolve> EvolveMsgPtr;
-	void cb(EvolveMsgPtr &_msg)
+	void cb(EvPtr &_msg)
     {
         counter++;
-        this->tours[_msg->individual].setTime(_msg->time);
+        this->tours[_msg->index()].setTime(_msg->time());
     }
 
     void SendGenes( gazebo::transport::PublisherPtr imagePub){
     	for(int i=0; i<NumRobots; i++){
-    		genes_exchanging_msgs::msgs::EvolveRequest request;
-    		request.index = i;
+    		evReqPtr request;
+    		request->set_index(i);
     		for( int j=0; j<numberOfCities; j++){	
-    			request.road[j] = this->tours[i].getCity(j);
-    			request.speeds[j] = this->tours[i].getSpeed(j);
+    			request->set_road(j,this->tours[i].getCity(j));
+    			request->set_speeds(j,this->tours[i].getSpeed(j));
     		}
-    		request.carrot = this->tours[i].getCarrot;
+    		request->set_carrot(this->tours[i].getCarrot());
     	imagePub->WaitForConnection();
-        imagePub->Publish(request);
+        imagePub->Publish(*request);
     	}
     }
 };
@@ -289,7 +296,7 @@ public:
 			}
 		}
 
-		double alpha = (((double)rand())/RAND_MAX));
+		double alpha = (((double)rand())/RAND_MAX);
 		for (int i = 1; i < numberOfCities; i++) {
 			speed.push_back(alpha*parent1.getSpeed(i) + (1-alpha)*parent2.getSpeed(i));
 		}
@@ -368,8 +375,8 @@ int main(int _argc, char **_argv){
     // Create our nodes for communication
     gazebo::transport::NodePtr node(new gazebo::transport::Node());
     node->Init();
-    gazebo::transport::SubscriberPtr sub = node->Subscribe("~/Evolve", pop.cb());
-    gazebo::transport::PublisherPtr sender = node->Advertise("~/EvolveRequest");
+    gazebo::transport::SubscriberPtr sub = node->Subscribe("~/Evolve", &Population::cb, &pop);
+    gazebo::transport::PublisherPtr sender = node->Advertise<evolve_robots_msgs::msgs::EvolveRequest>("~/EvolveRequest");
 
     Tour fittest;
     for(int loop=0; loop<=maxIt; loop++){
