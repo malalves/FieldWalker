@@ -11,7 +11,7 @@ using namespace std;
 #define numberOfCities 20
 #define numberOfIndividuals 100
 #define maxIt 300
-#define mutationRate 0.015
+#define mutationRate 0.02
 #define tournamentSize 5
 #define elitism true
 
