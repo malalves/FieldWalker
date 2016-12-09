@@ -1,0 +1,9 @@
+package evolve_robots_msgs.msgs;
+
+message EvolveRequest
+{
+  required vector<int>      road  = 1;
+  required vector<double>   speeds = 2;
+  required double           carrot = 3;
+  required int              index = 4; 
+}
