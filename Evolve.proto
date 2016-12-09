@@ -1,7 +1,0 @@
-package evolve_robots_msgs.msgs;
-
-message Evolve
-{
-  required int32    index  = 1;
-  required double   time = 2; 
-}

@@ -1,0 +1,84 @@
+#IncludeRegexLine: ^[ 	]*#[ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/malalves/Documents/sistemas evolutivos/ProjetoFinal/AG/msgs/build/Evolve.pb.cc
+Evolve.pb.h
+/home/malalves/Documents/sistemas evolutivos/ProjetoFinal/AG/msgs/build/Evolve.pb.h
+algorithm
+-
+google/protobuf/stubs/common.h
+-
+google/protobuf/stubs/once.h
+-
+google/protobuf/io/coded_stream.h
+-
+google/protobuf/wire_format_lite_inl.h
+-
+google/protobuf/descriptor.h
+-
+google/protobuf/generated_message_reflection.h
+-
+google/protobuf/reflection_ops.h
+-
+google/protobuf/wire_format.h
+-
+
+/home/malalves/Documents/sistemas evolutivos/ProjetoFinal/AG/msgs/build/Evolve.pb.h
+string
+-
+google/protobuf/stubs/common.h
+-
+google/protobuf/generated_message_util.h
+-
+google/protobuf/message.h
+-
+google/protobuf/repeated_field.h
+-
+google/protobuf/extension_set.h
+-
+google/protobuf/unknown_field_set.h
+-
+
+/home/malalves/Documents/sistemas evolutivos/ProjetoFinal/AG/msgs/build/EvolveRequest.pb.cc
+EvolveRequest.pb.h
+/home/malalves/Documents/sistemas evolutivos/ProjetoFinal/AG/msgs/build/EvolveRequest.pb.h
+algorithm
+-
+google/protobuf/stubs/common.h
+-
+google/protobuf/stubs/once.h
+-
+google/protobuf/io/coded_stream.h
+-
+google/protobuf/wire_format_lite_inl.h
+-
+google/protobuf/descriptor.h
+-
+google/protobuf/generated_message_reflection.h
+-
+google/protobuf/reflection_ops.h
+-
+google/protobuf/wire_format.h
+-
+
+/home/malalves/Documents/sistemas evolutivos/ProjetoFinal/AG/msgs/build/EvolveRequest.pb.h
+string
+-
+google/protobuf/stubs/common.h
+-
+google/protobuf/generated_message_util.h
+-
+google/protobuf/message.h
+-
+google/protobuf/repeated_field.h
+-
+google/protobuf/extension_set.h
+-
+google/protobuf/unknown_field_set.h
+-
+
