@@ -189,17 +189,17 @@ public:
     }
 
     void SendGenes( gazebo::transport::PublisherPtr imagePub){
-    	genes_exchanging_msgs::msgs::EvolveRequest request;
     	for(int i=0; i<NumRobots; i++){
+    		genes_exchanging_msgs::msgs::EvolveRequest request;
     		request.index = i;
     		for( int j=0; j<numberOfCities; j++){	
     			request.road[j] = this->tours[i].getCity(j);
     			request.speeds[j] = this->tours[i].getSpeed(j);
     		}
     		request.carrot = this->tours[i].getCarrot;
-    	}
     	imagePub->WaitForConnection();
         imagePub->Publish(request);
+    	}
     }
 };
 
