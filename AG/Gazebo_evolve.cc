@@ -369,7 +369,7 @@ int main(int _argc, char **_argv){
 	Population pop(numberOfIndividuals,true);
 	Cities ct;
 
-    // Load a world
+    // Load a world ajustar isso
     gazebo::physics::WorldPtr world = gazebo::loadWorld("worlds/empty.world");
 
     // Create our nodes for communication

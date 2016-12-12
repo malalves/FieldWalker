@@ -25,8 +25,6 @@ namespace gazebo
 
 		public: const double timeout = 120;
 
-		public: bool listenTime = 0;
-
 		public: double timeInit = -1;
 
 		public: bool end = 0;
@@ -42,7 +40,7 @@ namespace gazebo
 
 		public: math::Pose pose;
 
-		public: vector<int> tour;
+		public: std::vector<int> tour;
 
 		public: int wayCounter = 0;
 
@@ -62,7 +60,13 @@ namespace gazebo
 	    /// \brief Pointer to the update event connection
 	    public: event::ConnectionPtr updateConnection;
 
-	    public: gazebo::transport::NodePtr node(new gazebo::transport::Node());
+	    public: gazebo::transport::NodePtr node;
+
+	    public: gazebo::transport::SubscriberPtr subAG;
+
+	    public: gazebo::transport::SubscriberPtr subTime;
+
+	    public: gazebo::transport::PublisherPtr sender;
 
 	    public: EvPtr data;
 
@@ -85,9 +89,11 @@ namespace gazebo
 			this->Jcontrol = NULL;
 		}
 
-		public: cbTime(ConstWorldStatisticsPtr &_msg){
-			if(listenTime){
-
+		public: void cbTime(ConstWorldStatisticsPtr &_msgs){
+			if(end){
+				data->set_time(_msgs->real_time().sec() - timeInit);
+				sender->WaitForConnection();
+        		sender->Publish(*data);
 			}
 			if(timeInit == -1){
 				timeInit = _msgs->real_time().sec();
@@ -98,8 +104,9 @@ namespace gazebo
 			}
 		}
 
-		public: cbAG(evReqPtr &_msgs){
-
+		public: void cbAG(evReqPtr &_msgs){
+			data->set_index(_msgs->index());
+			//colocar a rota
 		}
 
 		public: void Load(physics::ModelPtr _parent, sdf::ElementPtr /*_sdf*/){
@@ -120,10 +127,12 @@ namespace gazebo
 			this->Jcontrol->SetVelocityPID(this->RJoint->GetScopedName(false),pid);
 			this->Jcontrol->SetVelocityPID(this->LJoint->GetScopedName(false),pid);
 
+			gazebo::transport::NodePtr nodeTmp(new gazebo::transport::Node());
+			node = nodeTmp;
     		node->Init();
-    		gazebo::transport::SubscriberPtr subAG = node->Subscribe("~/EvolveRequest", &ModelLine::cbAG, this);
-  			gazebo::transport::SubscriberPtr subTime = node->Subscribe("~/world_stats", &ModelLine::cbTime, this);
-    		gazebo::transport::PublisherPtr sender = node->Advertise<evolve_robots_msgs::msgs::Evolve>("~/Evolve");
+    		subAG = node->Subscribe("~/EvolveRequest", &ModelLine::cbAG, this);
+  			subTime = node->Subscribe("~/world_stats", &ModelLine::cbTime, this);
+    		sender = node->Advertise<evolve_robots_msgs::msgs::Evolve>("~/Evolve");
 
 
 			this->updateConnection = event::Events::ConnectWorldUpdateBegin(boost::bind(&ModelLine::OnUpdate, this, _1));
@@ -182,10 +191,13 @@ namespace gazebo
 			//printf("ang:%f\nR:%f\nL:%f\n", angDiference, speed.x, speed.y);
 
 			toNext = (pose.pos.x - this->points[wayCounter+1]->x)*(pose.pos.x - this->points[wayCounter+1]->x);
-			toNext += (pose.pos.y - this->points[wayCounter+1]->y)*(pose.pos.y - this->points[wayCounter+1]->y)
+			toNext += (pose.pos.y - this->points[wayCounter+1]->y)*(pose.pos.y - this->points[wayCounter+1]->y);
 			toNext = sqrt(toNext);
 			if(toNext < 3){
 				wayCounter++;
+			}
+			if(wayCounter == 10){
+				end = 1;
 			}
 
 			return speed;
