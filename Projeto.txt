@@ -4,7 +4,7 @@ Ideia para o projeto final:
 
 -parametros a serem otimizados: sequencia de waypoints, velocidade e distancia do carrot
 
--simulador a ser usado: ?
+-simulador a ser usado: ? (decidimos pelo gazebo)
 
 -linguagem: c/c++
 

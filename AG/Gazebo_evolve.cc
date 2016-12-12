@@ -70,7 +70,7 @@ private:
 	vector<double> speed;
 	double fitness;
 	double time;
-	double carrot;
+	vector<double> carrot;
 
 public:
 	// Constructs a blank tour
@@ -78,14 +78,14 @@ public:
 		for (int i = 0; i <numberOfCities; i++) {
 			tour.push_back(i);
 			speed.push_back(1.0 + 2.0*(((double)rand())/RAND_MAX));
+			carrot.push_back((double)rand())/RAND_MAX;
 		}
-		carrot = ((double)rand())/RAND_MAX;
 		random_shuffle(tour.begin() + 1,tour.end(), myrandom);
 		fitness = 0;
 		time = 0;
 	}
 
-	Tour(vector<int> newTour, vector<double> newSpeed, double newCarrot){
+	Tour(vector<int> newTour, vector<double> newSpeed,vector<double> newCarrot){
 		tour = newTour;
 		speed = newSpeed;
 		carrot = newCarrot;
@@ -112,8 +112,8 @@ public:
 	}
 
 	//gets the carrot of the tour
-	double getCarrot(){
-		return carrot;
+	double getCarrot(int i){
+		return carrot[i];
 	}
 
 	//swap two positions in the tour
@@ -129,8 +129,8 @@ public:
 	}
 
 	//mutates the tour carrot vector
-	void changeCarrot(){
-        this->carrot = this->carrot + (-0.05 + 0.1*(((double)rand())/RAND_MAX));
+	void changeCarrot(int  i){
+        this->carrot[i] = this->carrot[i] + (-0.05 + 0.1*(((double)rand())/RAND_MAX));
 	}
 
 	// Gets the total travel time for the tour
@@ -202,8 +202,8 @@ public:
     		for( int j=0; j<numberOfCities; j++){	
     			request->set_road(j,this->tours[i].getCity(j));
     			request->set_speeds(j,this->tours[i].getSpeed(j));
-    		}
-    		request->set_carrot(this->tours[i].getCarrot());
+			request->set_carrot(this->tours[i].getCarrot(j));
+    		}    		
     	imagePub->WaitForConnection();
         imagePub->Publish(*request);
     	}
@@ -299,9 +299,8 @@ public:
 		double alpha = (((double)rand())/RAND_MAX);
 		for (int i = 1; i < numberOfCities; i++) {
 			speed.push_back(alpha*parent1.getSpeed(i) + (1-alpha)*parent2.getSpeed(i));
+			carrot.push_back(alpha*parent1.getCarrot(i) + (1-alpha)*parent2.getCarrot(i));
 		}
-
-        double carrot = (alpha*parent1.getCarrot() + (1-alpha)*parent2.getCarrot());
 
 		Tour child = Tour(vec, speed, carrot);
 		return child;
@@ -327,7 +326,7 @@ public:
 
 			if(rand() < mutationRate){
                 //Changes carrot vector
-                tour.changeCarrot();
+                tour.changeCarrot(tourPos1);
 			}
 		}
 	}
@@ -396,8 +395,8 @@ int main(int _argc, char **_argv){
     for(int j = 0; j < numberOfCities; j++){
         fprintf(dados,"Point: %d  %d ",ct.x[fittest.getCity(j)],ct.y[fittest.getCity(j)]);
         fprintf(dados," Speed: %f \n",fittest.getSpeed(j));
+	fprintf(dados,"Carrot: %f\n",fittest.getCarrot(j));
     }
-    fprintf(dados,"Carrot: %f\n",fittest.getCarrot());
 
     fclose(dados);
     fclose(dados1);
