@@ -12,8 +12,8 @@
 #include <gazebo/transport/transport.hh>
 #include <gazebo/transport/Publisher.hh>
 #include <boost/shared_ptr.hpp>
-#include "Evolve.pb.h"
-#include "EvolveRequest.pb.h"
+#include "msgs/build/Evolve.pb.h"
+#include "msgs/build/EvolveRequest.pb.h"
 
 typedef const boost::shared_ptr<const evolve_robots_msgs::msgs::EvolveRequest> evReqPtr;
 typedef const boost::shared_ptr<const evolve_robots_msgs::msgs::Evolve> EvPtr;
@@ -29,14 +29,14 @@ namespace gazebo
 
 		public: bool end = 0;
 
-		public: double BaseSpeed = 10;
+		public: double BaseSpeed[10];
 
 		public: const double AngC = 0.01;
 
-		public: math::Vector2d* points[10] = {new math::Vector2d(0,0), new math::Vector2d(3,3)
+		public: math::Vector2d* points[11] = {new math::Vector2d(0,0), new math::Vector2d(3,3)
 			, new math::Vector2d(10,11), new math::Vector2d(-30,-50), new math::Vector2d(90,0)
 			, new math::Vector2d(26,-4), new math::Vector2d(-70,69), new math::Vector2d(40,40)
-			, new math::Vector2d(53,-14), new math::Vector2d(9,12)};
+			, new math::Vector2d(53,-14), new math::Vector2d(9,12), new math::Vector2d(0,0)};
 
 		public: math::Pose pose;
 
@@ -44,7 +44,7 @@ namespace gazebo
 
 		public: int wayCounter = 0;
 
-		public: const double carrotDist = 2;
+		public: double carrotDist[10];
 
 		// Pointer to the model
 		private: physics::ModelPtr model;
@@ -106,7 +106,15 @@ namespace gazebo
 
 		public: void cbAG(evReqPtr &_msgs){
 			data->set_index(_msgs->index());
-			//colocar a rota
+			//colocar o indice da rota
+			for (int i = 0; i < 10; ++i)
+			{
+				tour.push_back(_msgs->road(i));
+				BaseSpeed[i] = _msgs->speeds(i);
+				carrotDist[i] = _msgs->carrot(i);
+			}
+			tour.push_back(_msgs->road(0));
+
 		}
 
 		public: void Load(physics::ModelPtr _parent, sdf::ElementPtr /*_sdf*/){
@@ -154,15 +162,15 @@ namespace gazebo
 			math::Vector2d Cpos, line, speed, relPos;
 
 			//line direction normalized
-			line.x = (this->points[wayCounter+1]->x-this->points[wayCounter]->x);
-			line.y = (this->points[wayCounter+1]->y-this->points[wayCounter]->y);
+			line.x = (this->points[tour[wayCounter+1]]->x-this->points[tour[wayCounter]]->x);
+			line.y = (this->points[tour[wayCounter+1]]->y-this->points[tour[wayCounter]]->y);
 			line.Normalize();
 						
 			pose = this->model->GetWorldPose();//pose of the model
 
 			//relative position of the model in relation to the last waypoint
-			Cpos.x = (pose.pos.x - this->points[wayCounter]->x);
-			Cpos.y = (pose.pos.y - this->points[wayCounter]->y);
+			Cpos.x = (pose.pos.x - this->points[tour[wayCounter]]->x);
+			Cpos.y = (pose.pos.y - this->points[tour[wayCounter]]->y);
 
 			relPos = Cpos;
 
@@ -172,8 +180,8 @@ namespace gazebo
 			printf("X:%f\nY:%f\n",Cpos.x,Cpos.y);
 
 			//adds the carrotDist in the direction of the line 
-			Cpos.x = Cpos.x + carrotDist*line.x;
-			Cpos.y = Cpos.y + carrotDist*line.y;
+			Cpos.x = Cpos.x + carrotDist[wayCounter]*line.x;
+			Cpos.y = Cpos.y + carrotDist[wayCounter]*line.y;
 			//printf("X:%f\nY:%f\n",Cpos.x,Cpos.y);
 
 			//gets the robot orientation
@@ -186,17 +194,17 @@ namespace gazebo
 			angDiference = normAng(DesiredYaw - yaw);
 
 			//seting the speed of each wheel on a vector2d
-			speed.x = BaseSpeed + AngC*BaseSpeed*angDiference;//Right wheel
-			speed.y = BaseSpeed - AngC*BaseSpeed*angDiference;//Left wheel
+			speed.x = BaseSpeed[wayCounter] + AngC*BaseSpeed[wayCounter]*angDiference;//Right wheel
+			speed.y = BaseSpeed[wayCounter] - AngC*BaseSpeed[wayCounter]*angDiference;//Left wheel
 			//printf("ang:%f\nR:%f\nL:%f\n", angDiference, speed.x, speed.y);
 
-			toNext = (pose.pos.x - this->points[wayCounter+1]->x)*(pose.pos.x - this->points[wayCounter+1]->x);
-			toNext += (pose.pos.y - this->points[wayCounter+1]->y)*(pose.pos.y - this->points[wayCounter+1]->y);
+			toNext = (pose.pos.x - this->points[tour[wayCounter+1]]->x)*(pose.pos.x - this->points[tour[wayCounter+1]]->x);
+			toNext += (pose.pos.y - this->points[tour[wayCounter+1]]->y)*(pose.pos.y - this->points[tour[wayCounter+1]]->y);
 			toNext = sqrt(toNext);
 			if(toNext < 3){
 				wayCounter++;
 			}
-			if(wayCounter == 10){
+			if(wayCounter == 11){
 				end = 1;
 			}
 

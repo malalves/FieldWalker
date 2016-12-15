@@ -115,12 +115,17 @@ class EvolveRequest : public ::google::protobuf::Message {
   inline ::google::protobuf::RepeatedField< double >*
       mutable_speeds();
 
-  // required double carrot = 3;
-  inline bool has_carrot() const;
+  // repeated double carrot = 3;
+  inline int carrot_size() const;
   inline void clear_carrot();
   static const int kCarrotFieldNumber = 3;
-  inline double carrot() const;
-  inline void set_carrot(double value);
+  inline double carrot(int index) const;
+  inline void set_carrot(int index, double value);
+  inline void add_carrot(double value);
+  inline const ::google::protobuf::RepeatedField< double >&
+      carrot() const;
+  inline ::google::protobuf::RepeatedField< double >*
+      mutable_carrot();
 
   // required int32 index = 4;
   inline bool has_index() const;
@@ -131,8 +136,6 @@ class EvolveRequest : public ::google::protobuf::Message {
 
   // @@protoc_insertion_point(class_scope:evolve_robots_msgs.msgs.EvolveRequest)
  private:
-  inline void set_has_carrot();
-  inline void clear_has_carrot();
   inline void set_has_index();
   inline void clear_has_index();
 
@@ -142,7 +145,7 @@ class EvolveRequest : public ::google::protobuf::Message {
   mutable int _cached_size_;
   ::google::protobuf::RepeatedField< ::google::protobuf::int32 > road_;
   ::google::protobuf::RepeatedField< double > speeds_;
-  double carrot_;
+  ::google::protobuf::RepeatedField< double > carrot_;
   ::google::protobuf::int32 index_;
   friend void  protobuf_AddDesc_EvolveRequest_2eproto();
   friend void protobuf_AssignDesc_EvolveRequest_2eproto();
@@ -218,28 +221,34 @@ EvolveRequest::mutable_speeds() {
   return &speeds_;
 }
 
-// required double carrot = 3;
-inline bool EvolveRequest::has_carrot() const {
-  return (_has_bits_[0] & 0x00000004u) != 0;
-}
-inline void EvolveRequest::set_has_carrot() {
-  _has_bits_[0] |= 0x00000004u;
-}
-inline void EvolveRequest::clear_has_carrot() {
-  _has_bits_[0] &= ~0x00000004u;
+// repeated double carrot = 3;
+inline int EvolveRequest::carrot_size() const {
+  return carrot_.size();
 }
 inline void EvolveRequest::clear_carrot() {
-  carrot_ = 0;
-  clear_has_carrot();
+  carrot_.Clear();
 }
-inline double EvolveRequest::carrot() const {
+inline double EvolveRequest::carrot(int index) const {
   // @@protoc_insertion_point(field_get:evolve_robots_msgs.msgs.EvolveRequest.carrot)
+  return carrot_.Get(index);
+}
+inline void EvolveRequest::set_carrot(int index, double value) {
+  carrot_.Set(index, value);
+  // @@protoc_insertion_point(field_set:evolve_robots_msgs.msgs.EvolveRequest.carrot)
+}
+inline void EvolveRequest::add_carrot(double value) {
+  carrot_.Add(value);
+  // @@protoc_insertion_point(field_add:evolve_robots_msgs.msgs.EvolveRequest.carrot)
+}
+inline const ::google::protobuf::RepeatedField< double >&
+EvolveRequest::carrot() const {
+  // @@protoc_insertion_point(field_list:evolve_robots_msgs.msgs.EvolveRequest.carrot)
   return carrot_;
 }
-inline void EvolveRequest::set_carrot(double value) {
-  set_has_carrot();
-  carrot_ = value;
-  // @@protoc_insertion_point(field_set:evolve_robots_msgs.msgs.EvolveRequest.carrot)
+inline ::google::protobuf::RepeatedField< double >*
+EvolveRequest::mutable_carrot() {
+  // @@protoc_insertion_point(field_mutable_list:evolve_robots_msgs.msgs.EvolveRequest.carrot)
+  return &carrot_;
 }
 
 // required int32 index = 4;

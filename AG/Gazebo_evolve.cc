@@ -12,8 +12,8 @@
 #include <gazebo/transport/transport.hh>
 #include <gazebo/transport/Publisher.hh>
 #include <boost/shared_ptr.hpp>
-#include "Evolve.pb.h"
-#include "EvolveRequest.pb.h"
+#include "msgs/build/Evolve.pb.h"
+#include "msgs/build/EvolveRequest.pb.h"
 
 using namespace std;
 

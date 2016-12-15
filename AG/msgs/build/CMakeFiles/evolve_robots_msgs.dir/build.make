@@ -132,7 +132,7 @@ evolve_robots_msgs_EXTERNAL_OBJECTS =
 libevolve_robots_msgs.so: CMakeFiles/evolve_robots_msgs.dir/Evolve.pb.cc.o
 libevolve_robots_msgs.so: CMakeFiles/evolve_robots_msgs.dir/EvolveRequest.pb.cc.o
 libevolve_robots_msgs.so: CMakeFiles/evolve_robots_msgs.dir/build.make
-libevolve_robots_msgs.so: /usr/lib/x86_64-linux-gnu/libprotobuf.so
+libevolve_robots_msgs.so: /usr/local/lib/libprotobuf.so
 libevolve_robots_msgs.so: CMakeFiles/evolve_robots_msgs.dir/link.txt
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir="/home/malalves/Documents/sistemas evolutivos/ProjetoFinal/AG/msgs/build/CMakeFiles" --progress-num=$(CMAKE_PROGRESS_5) "Linking CXX shared library libevolve_robots_msgs.so"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/evolve_robots_msgs.dir/link.txt --verbose=$(VERBOSE)

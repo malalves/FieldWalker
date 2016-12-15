@@ -84,7 +84,7 @@ void protobuf_AddDesc_EvolveRequest_2eproto() {
   ::google::protobuf::DescriptorPool::InternalAddGeneratedFile(
     "\n\023EvolveRequest.proto\022\027evolve_robots_msg"
     "s.msgs\"L\n\rEvolveRequest\022\014\n\004road\030\001 \003(\005\022\016\n"
-    "\006speeds\030\002 \003(\001\022\016\n\006carrot\030\003 \002(\001\022\r\n\005index\030\004"
+    "\006speeds\030\002 \003(\001\022\016\n\006carrot\030\003 \003(\001\022\r\n\005index\030\004"
     " \002(\005", 124);
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedFile(
     "EvolveRequest.proto", &protobuf_RegisterTypes);
@@ -127,7 +127,6 @@ EvolveRequest::EvolveRequest(const EvolveRequest& from)
 
 void EvolveRequest::SharedCtor() {
   _cached_size_ = 0;
-  carrot_ = 0;
   index_ = 0;
   ::memset(_has_bits_, 0, sizeof(_has_bits_));
 }
@@ -164,23 +163,10 @@ EvolveRequest* EvolveRequest::New() const {
 }
 
 void EvolveRequest::Clear() {
-#define OFFSET_OF_FIELD_(f) (reinterpret_cast<char*>(      \
-  &reinterpret_cast<EvolveRequest*>(16)->f) - \
-   reinterpret_cast<char*>(16))
-
-#define ZR_(first, last) do {                              \
-    size_t f = OFFSET_OF_FIELD_(first);                    \
-    size_t n = OFFSET_OF_FIELD_(last) - f + sizeof(last);  \
-    ::memset(&first, 0, n);                                \
-  } while (0)
-
-  ZR_(carrot_, index_);
-
-#undef OFFSET_OF_FIELD_
-#undef ZR_
-
+  index_ = 0;
   road_.Clear();
   speeds_.Clear();
+  carrot_.Clear();
   ::memset(_has_bits_, 0, sizeof(_has_bits_));
   mutable_unknown_fields()->Clear();
 }
@@ -233,17 +219,21 @@ bool EvolveRequest::MergePartialFromCodedStream(
         break;
       }
 
-      // required double carrot = 3;
+      // repeated double carrot = 3;
       case 3: {
         if (tag == 25) {
          parse_carrot:
-          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+          DO_((::google::protobuf::internal::WireFormatLite::ReadRepeatedPrimitive<
                    double, ::google::protobuf::internal::WireFormatLite::TYPE_DOUBLE>(
-                 input, &carrot_)));
-          set_has_carrot();
+                 1, 25, input, this->mutable_carrot())));
+        } else if (tag == 26) {
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPackedPrimitiveNoInline<
+                   double, ::google::protobuf::internal::WireFormatLite::TYPE_DOUBLE>(
+                 input, this->mutable_carrot())));
         } else {
           goto handle_unusual;
         }
+        if (input->ExpectTag(25)) goto parse_carrot;
         if (input->ExpectTag(32)) goto parse_index;
         break;
       }
@@ -300,9 +290,10 @@ void EvolveRequest::SerializeWithCachedSizes(
       2, this->speeds(i), output);
   }
 
-  // required double carrot = 3;
-  if (has_carrot()) {
-    ::google::protobuf::internal::WireFormatLite::WriteDouble(3, this->carrot(), output);
+  // repeated double carrot = 3;
+  for (int i = 0; i < this->carrot_size(); i++) {
+    ::google::protobuf::internal::WireFormatLite::WriteDouble(
+      3, this->carrot(i), output);
   }
 
   // required int32 index = 4;
@@ -332,9 +323,10 @@ void EvolveRequest::SerializeWithCachedSizes(
       WriteDoubleToArray(2, this->speeds(i), target);
   }
 
-  // required double carrot = 3;
-  if (has_carrot()) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteDoubleToArray(3, this->carrot(), target);
+  // repeated double carrot = 3;
+  for (int i = 0; i < this->carrot_size(); i++) {
+    target = ::google::protobuf::internal::WireFormatLite::
+      WriteDoubleToArray(3, this->carrot(i), target);
   }
 
   // required int32 index = 4;
@@ -353,12 +345,7 @@ void EvolveRequest::SerializeWithCachedSizes(
 int EvolveRequest::ByteSize() const {
   int total_size = 0;
 
-  if (_has_bits_[2 / 32] & (0xffu << (2 % 32))) {
-    // required double carrot = 3;
-    if (has_carrot()) {
-      total_size += 1 + 8;
-    }
-
+  if (_has_bits_[3 / 32] & (0xffu << (3 % 32))) {
     // required int32 index = 4;
     if (has_index()) {
       total_size += 1 +
@@ -382,6 +369,13 @@ int EvolveRequest::ByteSize() const {
     int data_size = 0;
     data_size = 8 * this->speeds_size();
     total_size += 1 * this->speeds_size() + data_size;
+  }
+
+  // repeated double carrot = 3;
+  {
+    int data_size = 0;
+    data_size = 8 * this->carrot_size();
+    total_size += 1 * this->carrot_size() + data_size;
   }
 
   if (!unknown_fields().empty()) {
@@ -411,10 +405,8 @@ void EvolveRequest::MergeFrom(const EvolveRequest& from) {
   GOOGLE_CHECK_NE(&from, this);
   road_.MergeFrom(from.road_);
   speeds_.MergeFrom(from.speeds_);
-  if (from._has_bits_[2 / 32] & (0xffu << (2 % 32))) {
-    if (from.has_carrot()) {
-      set_carrot(from.carrot());
-    }
+  carrot_.MergeFrom(from.carrot_);
+  if (from._has_bits_[3 / 32] & (0xffu << (3 % 32))) {
     if (from.has_index()) {
       set_index(from.index());
     }
@@ -435,7 +427,7 @@ void EvolveRequest::CopyFrom(const EvolveRequest& from) {
 }
 
 bool EvolveRequest::IsInitialized() const {
-  if ((_has_bits_[0] & 0x0000000c) != 0x0000000c) return false;
+  if ((_has_bits_[0] & 0x00000008) != 0x00000008) return false;
 
   return true;
 }
@@ -444,7 +436,7 @@ void EvolveRequest::Swap(EvolveRequest* other) {
   if (other != this) {
     road_.Swap(&other->road_);
     speeds_.Swap(&other->speeds_);
-    std::swap(carrot_, other->carrot_);
+    carrot_.Swap(&other->carrot_);
     std::swap(index_, other->index_);
     std::swap(_has_bits_[0], other->_has_bits_[0]);
     _unknown_fields_.Swap(&other->_unknown_fields_);

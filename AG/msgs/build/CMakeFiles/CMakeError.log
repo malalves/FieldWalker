@@ -1,22 +1,22 @@
 Determining if the pthread_create exist failed with the following output:
 Change Dir: /home/malalves/Documents/sistemas evolutivos/ProjetoFinal/AG/msgs/build/CMakeFiles/CMakeTmp
 
-Run Build Command:"/usr/bin/make" "cmTC_13966/fast"
-/usr/bin/make -f CMakeFiles/cmTC_13966.dir/build.make CMakeFiles/cmTC_13966.dir/build
+Run Build Command:"/usr/bin/make" "cmTC_9c577/fast"
+/usr/bin/make -f CMakeFiles/cmTC_9c577.dir/build.make CMakeFiles/cmTC_9c577.dir/build
 make[1]: Entering directory '/home/malalves/Documents/sistemas evolutivos/ProjetoFinal/AG/msgs/build/CMakeFiles/CMakeTmp'
-Building C object CMakeFiles/cmTC_13966.dir/CheckSymbolExists.c.o
-/usr/bin/cc     -o CMakeFiles/cmTC_13966.dir/CheckSymbolExists.c.o   -c "/home/malalves/Documents/sistemas evolutivos/ProjetoFinal/AG/msgs/build/CMakeFiles/CMakeTmp/CheckSymbolExists.c"
-Linking C executable cmTC_13966
-/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_13966.dir/link.txt --verbose=1
-/usr/bin/cc       CMakeFiles/cmTC_13966.dir/CheckSymbolExists.c.o  -o cmTC_13966 -rdynamic 
-CMakeFiles/cmTC_13966.dir/CheckSymbolExists.c.o: In function `main':
+Building C object CMakeFiles/cmTC_9c577.dir/CheckSymbolExists.c.o
+/usr/bin/cc     -o CMakeFiles/cmTC_9c577.dir/CheckSymbolExists.c.o   -c "/home/malalves/Documents/sistemas evolutivos/ProjetoFinal/AG/msgs/build/CMakeFiles/CMakeTmp/CheckSymbolExists.c"
+Linking C executable cmTC_9c577
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_9c577.dir/link.txt --verbose=1
+/usr/bin/cc       CMakeFiles/cmTC_9c577.dir/CheckSymbolExists.c.o  -o cmTC_9c577 -rdynamic 
+CMakeFiles/cmTC_9c577.dir/CheckSymbolExists.c.o: In function `main':
 CheckSymbolExists.c:(.text+0x16): undefined reference to `pthread_create'
 collect2: error: ld returned 1 exit status
-CMakeFiles/cmTC_13966.dir/build.make:97: recipe for target 'cmTC_13966' failed
-make[1]: *** [cmTC_13966] Error 1
+CMakeFiles/cmTC_9c577.dir/build.make:97: recipe for target 'cmTC_9c577' failed
+make[1]: *** [cmTC_9c577] Error 1
 make[1]: Leaving directory '/home/malalves/Documents/sistemas evolutivos/ProjetoFinal/AG/msgs/build/CMakeFiles/CMakeTmp'
-Makefile:126: recipe for target 'cmTC_13966/fast' failed
-make: *** [cmTC_13966/fast] Error 2
+Makefile:126: recipe for target 'cmTC_9c577/fast' failed
+make: *** [cmTC_9c577/fast] Error 2
 
 File /home/malalves/Documents/sistemas evolutivos/ProjetoFinal/AG/msgs/build/CMakeFiles/CMakeTmp/CheckSymbolExists.c:
 /* */
@@ -36,20 +36,20 @@ int main(int argc, char** argv)
 Determining if the function pthread_create exists in the pthreads failed with the following output:
 Change Dir: /home/malalves/Documents/sistemas evolutivos/ProjetoFinal/AG/msgs/build/CMakeFiles/CMakeTmp
 
-Run Build Command:"/usr/bin/make" "cmTC_67e6b/fast"
-/usr/bin/make -f CMakeFiles/cmTC_67e6b.dir/build.make CMakeFiles/cmTC_67e6b.dir/build
+Run Build Command:"/usr/bin/make" "cmTC_6b0dd/fast"
+/usr/bin/make -f CMakeFiles/cmTC_6b0dd.dir/build.make CMakeFiles/cmTC_6b0dd.dir/build
 make[1]: Entering directory '/home/malalves/Documents/sistemas evolutivos/ProjetoFinal/AG/msgs/build/CMakeFiles/CMakeTmp'
-Building C object CMakeFiles/cmTC_67e6b.dir/CheckFunctionExists.c.o
-/usr/bin/cc    -DCHECK_FUNCTION_EXISTS=pthread_create   -o CMakeFiles/cmTC_67e6b.dir/CheckFunctionExists.c.o   -c /usr/share/cmake-3.5/Modules/CheckFunctionExists.c
-Linking C executable cmTC_67e6b
-/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_67e6b.dir/link.txt --verbose=1
-/usr/bin/cc   -DCHECK_FUNCTION_EXISTS=pthread_create    CMakeFiles/cmTC_67e6b.dir/CheckFunctionExists.c.o  -o cmTC_67e6b -rdynamic -lpthreads 
+Building C object CMakeFiles/cmTC_6b0dd.dir/CheckFunctionExists.c.o
+/usr/bin/cc    -DCHECK_FUNCTION_EXISTS=pthread_create   -o CMakeFiles/cmTC_6b0dd.dir/CheckFunctionExists.c.o   -c /usr/share/cmake-3.5/Modules/CheckFunctionExists.c
+Linking C executable cmTC_6b0dd
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_6b0dd.dir/link.txt --verbose=1
+/usr/bin/cc   -DCHECK_FUNCTION_EXISTS=pthread_create    CMakeFiles/cmTC_6b0dd.dir/CheckFunctionExists.c.o  -o cmTC_6b0dd -rdynamic -lpthreads 
 /usr/bin/ld: cannot find -lpthreads
 collect2: error: ld returned 1 exit status
-CMakeFiles/cmTC_67e6b.dir/build.make:97: recipe for target 'cmTC_67e6b' failed
-make[1]: *** [cmTC_67e6b] Error 1
+CMakeFiles/cmTC_6b0dd.dir/build.make:97: recipe for target 'cmTC_6b0dd' failed
+make[1]: *** [cmTC_6b0dd] Error 1
 make[1]: Leaving directory '/home/malalves/Documents/sistemas evolutivos/ProjetoFinal/AG/msgs/build/CMakeFiles/CMakeTmp'
-Makefile:126: recipe for target 'cmTC_67e6b/fast' failed
-make: *** [cmTC_67e6b/fast] Error 2
+Makefile:126: recipe for target 'cmTC_6b0dd/fast' failed
+make: *** [cmTC_6b0dd/fast] Error 2
 
 
