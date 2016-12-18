@@ -18,18 +18,17 @@
 using namespace std;
 
 #define numberOfCities 20
-#define numberOfIndividuals 100
+#define numberOfIndividuals 10
 #define maxIt 300
 #define mutationRate 0.015
-#define tournamentSize 5
-#define NumRobots 10
+#define tournamentSize 2
 #define elitism true
 
 typedef const boost::shared_ptr<const evolve_robots_msgs::msgs::EvolveRequest> evReqPtr;
 typedef const boost::shared_ptr<const evolve_robots_msgs::msgs::Evolve> EvPtr;
 
 int counter;
-bool end;
+bool endSim;
 
 class Cities{
 public:
@@ -78,7 +77,7 @@ public:
 		for (int i = 0; i <numberOfCities; i++) {
 			tour.push_back(i);
 			speed.push_back(1.0 + 2.0*(((double)rand())/RAND_MAX));
-			carrot.push_back((double)rand())/RAND_MAX;
+			carrot.push_back((double)rand()/RAND_MAX);
 		}
 		random_shuffle(tour.begin() + 1,tour.end(), myrandom);
 		fitness = 0;
@@ -192,22 +191,20 @@ public:
     {
         counter++;
         this->tours[_msg->index()].setTime(_msg->time());
-        end = 1;
+        endSim = 1;
     }
 
     void SendGenes( gazebo::transport::PublisherPtr imagePub){
-    	for(int i=0; i<NumRobots; i++){
-    		evReqPtr request;
-    		request->set_index(i);
-    		for( int j=0; j<numberOfCities; j++){	
-    			request->set_road(j,this->tours[i].getCity(j));
-    			request->set_speeds(j,this->tours[i].getSpeed(j));
-			request->set_carrot(this->tours[i].getCarrot(j));
-    		}    		
-    	imagePub->WaitForConnection();
-        imagePub->Publish(*request);
-    	}
-    }
+		evReqPtr request;
+		request->set_index(counter);//counter is global var
+		for( int j=0; j<numberOfCities; j++){	
+			request->set_road(j,this->tours[counter].getCity(j));
+			request->set_speeds(j,this->tours[counter].getSpeed(j));
+			request->set_carrot(j,this->tours[counter].getCarrot(j));
+		}    		
+		imagePub->WaitForConnection();
+    	imagePub->Publish(*request);
+	}
 };
 
 class AG{
@@ -252,10 +249,10 @@ public:
 		//create vector of int for the cities and of double for the speeds, and add the starting position
 		vector<int> vec;
 		vector<double> speed;
+		vector<double> carrot;
 		for (int i = 0; i < numberOfCities; i++)
 		{
 			vec.push_back(0);
-			speed.push_back(0.0);
 		}
 
 		// Get start and end sub tour positions for parent1's tour
@@ -372,7 +369,7 @@ int main(int _argc, char **_argv){
     for(int loop=0; loop<=maxIt; loop++){
     	//Receive fitness for each robot simulated
         counter = 0;
-        while(counter < NumRobots){
+        while(counter < numberOfIndividuals){
         	// Load a world (check if the path is ok)
 		    gazebo::physics::WorldPtr world = gazebo::loadWorld("~/Documents/sistemas\ evolutivos/ProjetoFinal/AG/trial.world");
 
@@ -381,21 +378,31 @@ int main(int _argc, char **_argv){
 		    node->Init();
 		    gazebo::transport::SubscriberPtr sub = node->Subscribe("~/Evolve", &Population::cb, &pop);
 		    gazebo::transport::PublisherPtr sender = node->Advertise<evolve_robots_msgs::msgs::EvolveRequest>("~/EvolveRequest");
-        	//Send to world new parameters for robots
+        	//Send to world new parameters for the robot
         	pop.SendGenes(sender);
-        	end = 0;
-            while(!end){
+        	endSim = 0;
+            while(!endSim){
             }
         }
         fittest = pop.getFittest();
+        cout<< fittest.getFitness() << endl;
+        if(loop == 0){
+        	fprintf(dados1,"X\tY\tspeed\tcarrot\n");
+		    for(int j = 0; j < numberOfCities; j++){
+		        fprintf(dados1,"%d\t%d ",ct.x[fittest.getCity(j)],ct.y[fittest.getCity(j)]);
+		        fprintf(dados1,"\t%f\t",fittest.getSpeed(j));
+				fprintf(dados1,"%f\n",fittest.getCarrot(j));
+		    }
+        }
         pop = ag.evolvePopulation(pop);
     }
     fittest = pop.getFittest();
     cout<< fittest.getFitness() << endl;
+    fprintf(dados,"X\tY\tspeed\tcarrot\n");
     for(int j = 0; j < numberOfCities; j++){
-        fprintf(dados,"Point: %d  %d ",ct.x[fittest.getCity(j)],ct.y[fittest.getCity(j)]);
-        fprintf(dados," Speed: %f \n",fittest.getSpeed(j));
-	fprintf(dados,"Carrot: %f\n",fittest.getCarrot(j));
+        fprintf(dados,"%d\t%d ",ct.x[fittest.getCity(j)],ct.y[fittest.getCity(j)]);
+        fprintf(dados,"\t%f\t",fittest.getSpeed(j));
+		fprintf(dados,"%f\n",fittest.getCarrot(j));
     }
 
     fclose(dados);

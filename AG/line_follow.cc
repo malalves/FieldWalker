@@ -29,6 +29,8 @@ namespace gazebo
 
 		public: bool end = 0;
 
+		public: bool ready = 0;
+
 		public: double BaseSpeed[10];
 
 		public: const double AngC = 0.01;
@@ -114,7 +116,7 @@ namespace gazebo
 				carrotDist[i] = _msgs->carrot(i);
 			}
 			tour.push_back(_msgs->road(0));
-
+			ready = 1;
 		}
 
 		public: void Load(physics::ModelPtr _parent, sdf::ElementPtr /*_sdf*/){
@@ -214,12 +216,14 @@ namespace gazebo
 		// Called by the world update start event 
 		public: void OnUpdate(const common::UpdateInfo & /*_i axis = nfo*/)
 		{
-			math::Vector2d speed = carrotChaser();
-			// controls the wheels speed
-			this->Jcontrol->SetVelocityTarget(this->RJoint->GetScopedName(false),speed.x);
-			this->Jcontrol->SetVelocityTarget(this->LJoint->GetScopedName(false),speed.y);
-			//printf("R:%f\nL:%f\n", speed.x, speed.y);
-			//printf("R:%f\nL:%f\n", this->RJoint->GetVelocity(0), this->LJoint->GetVelocity(0));
+			if(ready){
+				math::Vector2d speed = carrotChaser();
+				// controls the wheels speed
+				this->Jcontrol->SetVelocityTarget(this->RJoint->GetScopedName(false),speed.x);
+				this->Jcontrol->SetVelocityTarget(this->LJoint->GetScopedName(false),speed.y);
+				//printf("R:%f\nL:%f\n", speed.x, speed.y);
+				//printf("R:%f\nL:%f\n", this->RJoint->GetVelocity(0), this->LJoint->GetVelocity(0));
+			}
 		}
 	};
 
