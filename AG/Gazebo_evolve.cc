@@ -29,6 +29,7 @@ typedef const boost::shared_ptr<const evolve_robots_msgs::msgs::EvolveRequest> e
 typedef const boost::shared_ptr<const evolve_robots_msgs::msgs::Evolve> EvPtr;
 
 int counter;
+bool end;
 
 class Cities{
 public:
@@ -71,7 +72,6 @@ private:
 	double fitness;
 	double time;
 	vector<double> carrot;
-
 public:
 	// Constructs a blank tour
 	Tour(){
@@ -144,7 +144,6 @@ private:
 	// Holds population of tours
 	Tour* tours;
 	int popSize;
-
 public:
     // Saves a tour
 	void saveTour(int index, Tour tour) {
@@ -193,6 +192,7 @@ public:
     {
         counter++;
         this->tours[_msg->index()].setTime(_msg->time());
+        end = 1;
     }
 
     void SendGenes( gazebo::transport::PublisherPtr imagePub){
@@ -356,7 +356,7 @@ int main(int _argc, char **_argv){
     // Initialize gazebo.
     gazebo::setupServer(v);
 
-
+    //initialize random and data files
     srand(time(NULL));
     FILE *dados,*dados1;
 
@@ -368,24 +368,24 @@ int main(int _argc, char **_argv){
 	Population pop(numberOfIndividuals,true);
 	Cities ct;
 
-    // Load a world ajustar isso
-    gazebo::physics::WorldPtr world = gazebo::loadWorld("worlds/empty.world");
-
-    // Create our nodes for communication
-    gazebo::transport::NodePtr node(new gazebo::transport::Node());
-    node->Init();
-    gazebo::transport::SubscriberPtr sub = node->Subscribe("~/Evolve", &Population::cb, &pop);
-    gazebo::transport::PublisherPtr sender = node->Advertise<evolve_robots_msgs::msgs::EvolveRequest>("~/EvolveRequest");
-
     Tour fittest;
     for(int loop=0; loop<=maxIt; loop++){
-        //Send to world new parameters for robots
-        pop.SendGenes(sender);
-
     	//Receive fitness for each robot simulated
         counter = 0;
         while(counter < NumRobots){
-            gazebo::common::Time::MSleep(10);
+        	// Load a world (check if the path is ok)
+		    gazebo::physics::WorldPtr world = gazebo::loadWorld("~/Documents/sistemas\ evolutivos/ProjetoFinal/AG/trial.world");
+
+		    // Create our nodes for communication
+		    gazebo::transport::NodePtr node(new gazebo::transport::Node());
+		    node->Init();
+		    gazebo::transport::SubscriberPtr sub = node->Subscribe("~/Evolve", &Population::cb, &pop);
+		    gazebo::transport::PublisherPtr sender = node->Advertise<evolve_robots_msgs::msgs::EvolveRequest>("~/EvolveRequest");
+        	//Send to world new parameters for robots
+        	pop.SendGenes(sender);
+        	end = 0;
+            while(!end){
+            }
         }
         fittest = pop.getFittest();
         pop = ag.evolvePopulation(pop);
